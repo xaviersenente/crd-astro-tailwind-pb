@@ -4,16 +4,26 @@ import { Picture } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import AnimatedPatterns from "../components/AnimatedPatterns.astro";
+import Button from "../components/Button.astro";
 
 import IconMusique from "../assets/icones/icon_musique.svg";
 import IconTheatre from "../assets/icones/icon_theatre.svg";
 import IconDanse from "../assets/icones/icon_danse.svg";
 import imgHero from "../assets/img/musique-01.jpg";
+import imgCrdInt from "../assets/img/conservatoire-interieur-05.jpg";
+import points from "../assets/icones/points.svg";
 
 const title = "Conservatoire Henri Dutilleux";
 const subTitle = "Conservatoire à Rayonnement Départemental du Grand Belfort";
 const description =
   "Le Conservatoire Henri Dutilleux de Belfort vous accueille pour découvrir la musique, la danse et le théâtre.";
+
+const stats = [
+  { number: 9, label: "sites" },
+  { number: 84, label: "enseignants" },
+  { number: 1500, label: "élèves" },
+  { number: 50, label: "disciplines" },
+];
 ---
 
 <Layout title={title} description={description}>
@@ -41,4 +51,44 @@ const description =
       pictureAttributes={{ class: "duotone absolute inset-0 object-cover" }}
     />
   </Hero>
+
+  <section
+    class="grille my-24 space-y-8 lg:mt-48 lg:space-y-0 lg:before:col-span-7 lg:before:col-start-1 lg:before:row-span-1 lg:before:row-start-2 lg:before:-mr-10 lg:before:-mb-10 lg:before:bg-pink"
+  >
+    <Picture
+      src={imgCrdInt}
+      alt="Salle de musique du conservatoire"
+      layout="full-width"
+      class="h-full object-cover"
+      pictureAttributes={{
+        class:
+          "max-h-[1100px] lg:col-span-7 lg:col-start-1 lg:row-span-2 lg:row-start-1 xl:ml-[calc((1296px-100vw)/2)]",
+      }}
+    />
+    <header
+      class="space-y-8 bg-white lg:col-span-8 lg:col-start-5 lg:row-span-1 lg:row-start-1 lg:bg-(image:--bg-points) lg:bg-position-[right_100px_center] lg:bg-no-repeat lg:p-28 lg:pr-40"
+      style={`--bg-points: url(${points.src})`}
+    >
+      <h2 class="mt-10 text-2xl leading-normal lg:text-3xl xl:text-4xl">
+        Découvrez le Conservatoire, ses enseignements, ses équipes dans un
+        nouveau lieu dédié à la culture artistique.
+      </h2>
+      <Button href="#" text="Plus d'info" />
+    </header>
+
+    <ul
+      class="grid grid-cols-2 gap-12 lg:col-span-4 lg:col-start-9 lg:row-start-2"
+    >
+      {
+        stats.map(({ number, label }) => (
+          <li>
+            <span class="block text-4xl text-pink lg:mb-12 lg:text-6xl">
+              {number}
+            </span>
+            <span>{label}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
 </Layout>
