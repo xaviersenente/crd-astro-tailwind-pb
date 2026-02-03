@@ -1,1 +1,1 @@
-# 2. Installation de Prettier
+# 5. Styles de base
