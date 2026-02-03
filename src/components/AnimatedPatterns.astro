@@ -1,0 +1,34 @@
+---
+import Patterns from "../assets/icones/patterns.svg";
+---
+
+<Patterns />
+
+<style>
+  .curveLines path {
+    opacity: 0;
+  }
+</style>
+
+<script>
+  const lines = document.querySelectorAll(".curveLines path");
+
+  if (lines.length > 0) {
+    lines.forEach((el, index) => {
+      const totalLength = el.getTotalLength();
+      el.style.strokeDasharray = totalLength.toString();
+      el.animate(
+        [
+          { strokeDashoffset: totalLength, opacity: 0 },
+          { strokeDashoffset: 0, opacity: 1 },
+        ],
+        {
+          duration: 1200,
+          delay: index * 150,
+          easing: "cubic-bezier(0.33, 0.33, 0.4, 0.99)",
+          fill: "backwards",
+        },
+      );
+    });
+  }
+</script>

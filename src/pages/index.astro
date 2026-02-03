@@ -3,6 +3,7 @@ import { Picture } from "astro:assets";
 
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
+import AnimatedPatterns from "../components/AnimatedPatterns.astro";
 
 import IconMusique from "../assets/icones/icon_musique.svg";
 import IconTheatre from "../assets/icones/icon_theatre.svg";
@@ -25,6 +26,12 @@ const description =
         <li><IconTheatre /> Théâtre</li>
         <li><IconDanse /> Danse</li>
       </ul>
+    </div>
+    <div
+      class="absolute inset-0 z-0 flex items-center justify-end overflow-hidden stroke-pink stroke-24 opacity-80 mix-blend-difference"
+      slot="patterns"
+    >
+      <AnimatedPatterns class="-ml-60 lg:ml-auto lg:w-[96vw]" />
     </div>
     <Picture
       slot="image"
