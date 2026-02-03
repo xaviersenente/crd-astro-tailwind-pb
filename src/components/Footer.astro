@@ -1,7 +1,61 @@
 ---
-// Informations et logique du footer
+import LogoFooter from "../assets/icones/icon_logoFooter.svg";
+import LogoGrandBelfort from "../assets/icones/logo-grand-belfort.svg";
+import IconFacebook from "../assets/icones/icon_facebook.svg";
+import IconInstagram from "../assets/icones/icon_instagram.svg";
+import IconTwitter from "../assets/icones/icon_twitter.svg";
+import IconYoutube from "../assets/icones/icon_youtube.svg";
+
+const socialLinks = [
+  { url: "https://facebook.com", label: "facebook", Icon: IconFacebook },
+  { url: "https://instagram.com", label: "instagram", Icon: IconInstagram },
+  { url: "https://twitter.com", label: "twitter", Icon: IconTwitter },
+  { url: "https://youtube.com", label: "youtube", Icon: IconYoutube },
+];
 ---
 
-<footer>
-  <!-- Coordonnées, liens secondaires, copyright -->
+<footer
+  class="grille space-y-6 bg-stone-900 px-6 py-16 text-sm text-white lg:space-y-0"
+>
+  <a class="block" href="/" aria-label="Accueil">
+    <LogoFooter />
+  </a>
+
+  <nav class="space-y-3 lg:col-span-3 lg:col-start-7">
+    <h3 class="text-sm tracking-wide text-stone-400 uppercase">Menu</h3>
+    <ul>
+      <li><a href="/agenda">Agenda</a></li>
+      <li><a href="/contact">Contact et accès</a></li>
+    </ul>
+  </nav>
+
+  <div class="space-y-3 lg:col-span-3 lg:col-start-10">
+    <h3 class="text-sm tracking-wide text-stone-400 uppercase">Contact</h3>
+    <address class="not-italic">
+      1 rue Paul Koepfler<br />90000 Belfort<br />
+      <a href="tel:0384542727">03 84 54 27 27</a><br />
+      <a href="mailto:conservatoire@agglo-belfort.fr"
+        >conservatoire@agglo-belfort.fr</a
+      >
+    </address>
+  </div>
+
+  <div class="lg:col-span-3 lg:col-start-7">
+    <LogoGrandBelfort />
+  </div>
+
+  <div class="space-y-3 lg:col-span-3 lg:col-start-10">
+    <h3 class="text-sm tracking-wide text-stone-400 uppercase">Nous suivre</h3>
+    <ul class="flex gap-4">
+      {
+        socialLinks.map(({ url, label, Icon }) => (
+          <li>
+            <a href={url} aria-label={label}>
+              <Icon class="fill-white" />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
 </footer>

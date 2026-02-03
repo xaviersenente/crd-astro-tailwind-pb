@@ -6,6 +6,8 @@
 
   --color-indigo: oklch(26.53% 0.1502 278.05); /* #1d096b */
   --color-pink: oklch(82.94% 0.1209 30.54); /* #feaa9b */
+
+  --my-grid: repeat(12, minmax(0, 64px));
 }
 
 @layer base {
@@ -23,5 +25,11 @@
   }
   ::selection {
     @apply bg-(--color-pink);
+  }
+}
+
+@layer components {
+  .grille {
+    @apply px-6 lg:grid lg:grid-cols-(--my-grid) lg:justify-center lg:gap-12;
   }
 }

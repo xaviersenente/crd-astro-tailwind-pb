@@ -1,1 +1,1 @@
-# 5. Styles de base
+# 7. composant Footer
