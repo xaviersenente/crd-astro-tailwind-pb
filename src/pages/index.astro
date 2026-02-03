@@ -1,17 +1,22 @@
 ---
+import { Picture } from "astro:assets";
+
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 
 import IconMusique from "../assets/icones/icon_musique.svg";
 import IconTheatre from "../assets/icones/icon_theatre.svg";
 import IconDanse from "../assets/icones/icon_danse.svg";
+import imgHero from "../assets/img/musique-01.jpg";
+
+const title = "Conservatoire Henri Dutilleux";
+const subTitle = "Conservatoire à Rayonnement Départemental du Grand Belfort";
+const description =
+  "Le Conservatoire Henri Dutilleux de Belfort vous accueille pour découvrir la musique, la danse et le théâtre.";
 ---
 
-<Layout>
-  <Hero
-    title="Conservatoire Henri Dutilleux"
-    subTitle="Conservatoire à rayonnement départemental du grand belfort"
-  >
+<Layout title={title} description={description}>
+  <Hero title={title} subTitle={subTitle}>
     <div class="flex-1 font-mono lg:text-3xl" slot="chapo">
       <ul
         class="grid grid-cols-3 gap-12 *:flex *:flex-col *:items-center *:gap-4 *:lg:flex-row"
@@ -21,5 +26,12 @@ import IconDanse from "../assets/icones/icon_danse.svg";
         <li><IconDanse /> Danse</li>
       </ul>
     </div>
+    <Picture
+      slot="image"
+      src={imgHero}
+      alt="Violoncelles"
+      layout="full-width"
+      pictureAttributes={{ class: "duotone absolute inset-0 object-cover" }}
+    />
   </Hero>
 </Layout>
