@@ -1,1 +1,1 @@
-# Installation Astro + Tailwind
+# 2. Installation de Prettier
