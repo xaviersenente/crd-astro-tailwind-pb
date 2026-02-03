@@ -1,0 +1,27 @@
+---
+const { title, subTitle } = Astro.props;
+---
+
+<div
+  class="grille relative grid h-screen grid-rows-[4fr_1fr] bg-indigo lg:grid-rows-[3fr_1fr]"
+>
+  <div class="z-2 my-12 space-y-8 self-end text-white lg:col-span-9">
+    <h1>{title}</h1>
+    {
+      subTitle && (
+        <h2 class="font-sans text-sm font-bold uppercase lg:text-lg">
+          {subTitle}
+        </h2>
+      )
+    }
+  </div>
+
+  <div
+    class="relative z-1 row-start-2 -mx-6 flex items-center bg-white px-6 text-xl leading-normal lg:col-span-9 lg:mx-0 lg:pl-0 lg:text-3xl lg:before:absolute lg:before:top-0 lg:before:ml-[-100%] lg:before:h-full lg:before:w-full lg:before:bg-white"
+  >
+    <slot name="chapo" />
+  </div>
+
+  <slot name="image" />
+  <slot name="patterns" />
+</div>
