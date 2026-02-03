@@ -32,4 +32,10 @@
   .grille {
     @apply px-6 lg:grid lg:grid-cols-(--my-grid) lg:justify-center lg:gap-12;
   }
+  header.bg-white #menu-btn[aria-expanded="false"] > span {
+    @apply !bg-black;
+  }
+  header:not(.bg-white) button[aria-label="Recherche"] > svg > * {
+    @apply max-lg:stroke-white;
+  }
 }
