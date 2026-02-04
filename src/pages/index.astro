@@ -5,6 +5,7 @@ import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import AnimatedPatterns from "../components/AnimatedPatterns.astro";
 import Button from "../components/Button.astro";
+import Card from "../components/Card.astro";
 
 import IconMusique from "../assets/icones/icon_musique.svg";
 import IconTheatre from "../assets/icones/icon_theatre.svg";
@@ -90,5 +91,33 @@ const stats = [
         ))
       }
     </ul>
+  </section>
+
+  <section
+    class="grille space-y-8 py-24 lg:before:col-span-2 lg:before:col-start-1 lg:before:mt-12 lg:before:h-px lg:before:bg-black"
+  >
+    <header class="space-y-6 lg:col-span-6 lg:col-start-3">
+      <h2 class="text-4xl lg:text-6xl">Agenda</h2>
+      <p class="text-xl leading-normal lg:text-3xl">
+        Lieu de création artistique, le conservatoire propose régulièrement des
+        actions culturelles ouvertes à tous.
+      </p>
+    </header>
+    <Button
+      href="#"
+      text="Tous les évènements"
+      classes="lg:col-span-4 lg:col-start-9 lg:self-start lg:justify-self-end"
+    />
+    {
+      [1, 2, 3].map((i) => (
+        <Card
+          title={`Titre de l'événement ${i}`}
+          date="Lundi 15 mars à 20h30"
+          excerpt="Description courte de l'événement à venir au conservatoire."
+          imgFile={imgHero}
+          imgAlt="Image de l'événement"
+        />
+      ))
+    }
   </section>
 </Layout>
