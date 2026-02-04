@@ -13,6 +13,7 @@ import IconDanse from "../assets/icones/icon_danse.svg";
 import imgHero from "../assets/img/musique-01.jpg";
 import imgCrdInt from "../assets/img/conservatoire-interieur-05.jpg";
 import points from "../assets/icones/points.svg";
+import imgCrdExt from "../assets/img/conservatoire-exterieur-03.jpg";
 
 const title = "Conservatoire Henri Dutilleux";
 const subTitle = "Conservatoire à Rayonnement Départemental du Grand Belfort";
@@ -119,5 +120,32 @@ const stats = [
         />
       ))
     }
+  </section>
+
+  <section
+    class="grille relative space-y-8 py-54 text-white lg:before:col-span-2 lg:before:col-start-1 lg:before:mt-12 lg:before:h-px lg:before:bg-white"
+  >
+    <header class="space-y-6 lg:col-span-6 lg:col-start-3">
+      <h2 class="text-4xl lg:text-6xl">Inscriptions</h2>
+      <p class="text-xl leading-normal lg:text-3xl">
+        Vous êtes désireux d'entrer au conservatoire&nbsp;? Vous trouverez ici
+        toutes les informations sur les modalités d'inscriptions.
+      </p>
+    </header>
+    <Button
+      classes="lg:col-span-4 lg:col-start-9 lg:self-start lg:justify-self-end"
+      href="/inscription"
+      text="S'inscrire"
+      variant="outlined"
+    />
+    <Picture
+      pictureAttributes={{
+        class:
+          "duotone absolute -z-1 inset-0 object-cover after:absolute after:inset-0 after:bg-indigo/50",
+      }}
+      src={imgCrdExt}
+      alt="Façade Est du conservatoire avec des pins devant"
+      layout="full-width"
+    />
   </section>
 </Layout>
