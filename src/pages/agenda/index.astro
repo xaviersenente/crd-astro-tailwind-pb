@@ -1,0 +1,42 @@
+---
+import { Picture } from "astro:assets";
+
+import Layout from "../../layouts/Layout.astro";
+import Hero from "../../components/Hero.astro";
+import Card from "../../components/Card.astro";
+
+import imgHero from "../../assets/img/musique-02.jpg";
+
+import { getUpcomingEvents } from "../../js/backend.mjs";
+
+const events = await getUpcomingEvents("event");
+
+const title = "Agenda";
+const description =
+  "Lieu de création artistique, le conservatoire propose régulièrement des actions culturelles ouvertes à tous.";
+---
+
+<Layout title={title} description={description}>
+  <Hero title={title}>
+    <p slot="chapo">
+      Lieu de création artistique, le conservatoire propose régulièrement des
+      actions culturelles ouvertes à tous.
+    </p>
+    <Picture
+      slot="image"
+      src={imgHero}
+      alt="Violoncelles"
+      layout="full-width"
+      pictureAttributes={{ class: "duotone !absolute inset-0 object-cover" }}
+    />
+  </Hero>
+  <div class="grille my-24">
+    {
+      events.length > 0 ? (
+        events.map((event) => <Card {...event} />)
+      ) : (
+        <p class="col-span-4">Aucun événement à afficher.</p>
+      )
+    }
+  </div>
+</Layout>
