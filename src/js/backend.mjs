@@ -57,6 +57,37 @@ export async function getUpcomingEvents(collection = "event") {
 }
 
 /**
+ * Récupère les prochains événements à venir (limité à un nombre spécifique)
+ * @param {number} limit - Nombre d'événements à récupérer (défaut: 3)
+ * @param {string} collection - Nom de la collection (défaut: "event")
+ * @returns {Promise<Array>} Liste des prochains événements ou tableau vide
+ */
+export async function getNextEvents(limit = 3, collection = "event") {
+  try {
+    // Crée un objet Date représentant la date d'aujourd'hui
+    const today = new Date();
+    // Réinitialise l'heure à 00:00:00 (pour ne pas inclure d'événements passés)
+    today.setHours(0, 0, 0, 0);
+
+    // Récupère les événements de la collection spécifiée, en les filtrant par date
+    // et en limitant le nombre de résultats
+    const items = await pb.collection(collection).getList(1, limit, {
+      filter: `date >= "${today.toISOString()}"`, // Filtre basé sur la date actuelle
+      sort: "+date", // Tri croissant des événements par date
+    });
+    // Retourne les événements récupérés
+    return items.items;
+  } catch (error) {
+    // Si une erreur survient lors de la récupération des événements, elle est loguée dans la console
+    console.error(
+      "Erreur lors de la récupération des prochains événements :",
+      error,
+    );
+    return [];
+  }
+}
+
+/**
  * Récupère un élément spécifique par son ID
  * @param {string} id - Identifiant de l'élément
  * @param {string} collection - Nom de la collection
