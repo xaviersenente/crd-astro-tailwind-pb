@@ -15,6 +15,10 @@ import imgCrdInt from "../assets/img/conservatoire-interieur-05.jpg";
 import points from "../assets/icones/points.svg";
 import imgCrdExt from "../assets/img/conservatoire-exterieur-03.jpg";
 
+import { getNextEvents } from "../js/backend.mjs";
+
+const events = await getNextEvents();
+
 const title = "Conservatoire Henri Dutilleux";
 const subTitle = "Conservatoire à Rayonnement Départemental du Grand Belfort";
 const description =
@@ -110,15 +114,11 @@ const stats = [
       classes="lg:col-span-4 lg:col-start-9 lg:self-start lg:justify-self-end"
     />
     {
-      [1, 2, 3].map((i) => (
-        <Card
-          title={`Titre de l'événement ${i}`}
-          date="Lundi 15 mars à 20h30"
-          excerpt="Description courte de l'événement à venir au conservatoire."
-          imgFile={imgHero}
-          imgAlt="Image de l'événement"
-        />
-      ))
+      events.length > 0 ? (
+        events.map((event) => <Card {...event} />)
+      ) : (
+        <p class="col-span-4">Aucun événement à afficher.</p>
+      )
     }
   </section>
 
