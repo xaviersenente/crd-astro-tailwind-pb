@@ -1,0 +1,42 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import ImagePB from "../components/ImagePB.astro";
+
+import { getCollection } from "../js/backend.mjs";
+
+export async function getStaticPaths() {
+  const pages = await getCollection("page");
+
+  return pages.map((page) => ({
+    params: { page: page.id },
+    props: { page },
+  }));
+}
+
+const { page } = Astro.props;
+
+if (!page) {
+  return Astro.redirect("/404");
+}
+
+const title = page.title;
+const description = page.excerpt;
+---
+
+<Layout title={title} description={description}>
+  <Hero title={title}>
+    <p slot="chapo">{page.excerpt}</p>
+    <ImagePB
+      slot="image"
+      record={page}
+      field="imgFile"
+      alt={page?.imgAlt || "Image"}
+      classPicture="duotone !absolute inset-0 object-cover"
+    />
+  </Hero>
+  <div
+    class="rich-editor mx-6 my-16 max-w-2xl lg:mx-auto"
+    set:html={page.description}
+  />
+</Layout>
