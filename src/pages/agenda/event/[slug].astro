@@ -1,0 +1,70 @@
+---
+import ImagePB from "../../../components/ImagePB.astro";
+import Layout from "../../../layouts/Layout.astro";
+import Patterns from "../../../components/AnimatedPatterns.astro";
+import { formatDate } from "../../../js/helpers";
+
+import { getCollection } from "../../../js/backend.mjs";
+
+export async function getStaticPaths() {
+  const events = await getCollection("event");
+
+  return events.map((event) => ({
+    params: { slug: event.id },
+    props: { event },
+  }));
+}
+
+const { event } = Astro.props;
+
+if (!event) {
+  return Astro.redirect("/404");
+}
+
+const title = event.title;
+const description = event.excerpt;
+---
+
+<Layout title={title} description={description}>
+  <div class="grille relative lg:pt-28">
+    <ImagePB
+      record={event}
+      field="imgFile"
+      alt={event.imgAlt}
+      classPicture="duotone lg:col-span-5 -ml-6 -mr-6 lg:mx-0"
+    />
+    <header class="lg:col-span-6 lg:col-start-7">
+      <h1 class="my-12">{event.title}</h1>
+      <ul
+        class="divide-y divide-gray-300 *:grid *:grid-cols-4 *:items-center *:py-4"
+      >
+        <li>
+          <span class="col-span-1 text-sm font-bold uppercase">Date</span>
+          <span class="col-span-3">{formatDate(event.date)}</span>
+        </li>
+        <li>
+          <span class="col-span-1 text-sm font-bold uppercase">Lieux</span>
+          <span class="col-span-3">{event.lieu}</span>
+        </li>
+        <li>
+          <span class="col-span-1 text-sm font-bold uppercase">Catégorie</span>
+          <span class="col-span-3">{event.category}</span>
+        </li>
+      </ul>
+    </header>
+  </div>
+  <p
+    class="my-12 px-6 text-2xl leading-normal lg:mx-auto lg:max-w-4xl lg:text-3xl lg:leading-relaxed"
+  >
+    {event.excerpt}
+  </p>
+  <div
+    class="rich-editor my-12 space-y-3 px-6 lg:mx-auto lg:max-w-2xl"
+    set:html={event.description}
+  />
+  <div
+    class="absolute inset-0 z-[-1] flex items-center justify-end overflow-hidden stroke-pink stroke-[24px] opacity-40"
+  >
+    <Patterns class="-mr-[5vw] -ml-60 lg:ml-auto" />
+  </div>
+</Layout>

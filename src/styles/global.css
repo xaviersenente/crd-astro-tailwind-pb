@@ -44,4 +44,32 @@
       @apply flex-[1_0_100%] object-cover mix-blend-multiply grayscale transition-all duration-300 ease-in-out;
     }
   }
+  .rich-editor {
+    p {
+      @apply mb-4;
+    }
+    h2,
+    h3,
+    h4 {
+      @apply mb-4;
+    }
+    h2:not(:first-child),
+    h3:not(:first-child),
+    h4:not(:first-child) {
+      @apply mt-8;
+    }
+    ul {
+      @apply my-4 list-disc pl-5;
+    }
+    ol {
+      @apply my-4 list-decimal pl-5;
+    }
+    figure,
+    p:has(img) {
+      @apply lg:-mx-50;
+    }
+    figcaption {
+      @apply mt-2 text-sm text-gray-500;
+    }
+  }
 }
