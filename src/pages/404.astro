@@ -1,0 +1,28 @@
+---
+import { Picture } from "astro:assets";
+
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+
+import imgHero from "../assets/img/agenda-musique-09.jpg";
+
+const title = "Page introuvable";
+const description =
+  "La page que vous recherchez n'existe pas ou a été déplacée.";
+---
+
+<Layout title={title} description={description}>
+  <Hero title="Oups ! Cette page n'existe pas">
+    <p slot="chapo">
+      La page que vous recherchez semble avoir pris une fausse note... Elle
+      n'existe plus ou a changé d'adresse.
+    </p>
+    <Picture
+      slot="image"
+      src={imgHero}
+      alt="Violoncelles"
+      layout="full-width"
+      pictureAttributes={{ class: "duotone !absolute inset-0 object-cover" }}
+    />
+  </Hero>
+</Layout>
