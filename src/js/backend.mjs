@@ -3,7 +3,9 @@ import PocketBase from "pocketbase";
 
 // Définition de l'URL de l'instance PocketBase
 const POCKETBASE_URL =
-  import.meta.env?.PUBLIC_POCKETBASE_URL || "http://127.0.0.1:8090";
+  process.env.PUBLIC_POCKETBASE_URL ||
+  import.meta.env?.PUBLIC_POCKETBASE_URL ||
+  "http://127.0.0.1:8090";
 
 // Création de l'instance PocketBase avec l'URL définie plus haut
 const pb = new PocketBase(POCKETBASE_URL);
