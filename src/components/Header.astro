@@ -1,6 +1,28 @@
 ---
 import Logo from "../assets/icones/logo.svg";
 import IconSearch from "../assets/icones/icon_search.svg";
+
+import { getCollection } from "../js/backend.mjs";
+import { slugifyCollection } from "../js/helpers";
+
+// Récupère les pages avec un menuOrder défini (= pages du menu)
+const pages = slugifyCollection(await getCollection("page"));
+const pageItems = pages
+  .filter((p) => p.menuOrder)
+  .map((p) => ({
+    href: `/${p.slug}`,
+    label: p.menuLabel || p.title,
+    class: p.menuClass || "",
+    order: p.menuOrder,
+  }));
+
+// Items fixes (routes non-PocketBase)
+const fixedItems = [{ href: "/agenda", label: "Agenda", class: "", order: 3 }];
+
+// Fusion et tri par ordre
+const navItems = [...pageItems, ...fixedItems].sort(
+  (a, b) => a.order - b.order,
+);
 ---
 
 <header
@@ -43,28 +65,18 @@ import IconSearch from "../assets/icones/icon_search.svg";
       <ul
         class="mx-16 mt-[25vh] *:relative *:overflow-hidden lg:m-0 lg:flex *:lg:before:absolute *:lg:before:bottom-0 *:lg:before:left-0 *:lg:before:h-2 *:lg:before:w-full *:lg:before:translate-y-2 *:lg:before:bg-black *:lg:before:transition-all *:lg:before:duration-300 *:lg:before:ease-in-out *:lg:hover:before:translate-y-0"
       >
-        <li>
-          <a class="block px-5 py-4 lg:py-8" href="/ovsk2ybob0vye6o"
-            >Le conservatoire</a
-          >
-        </li>
-        <li>
-          <a class="block px-5 py-4 lg:py-8" href="/jcojqb2t23v23ok"
-            >Enseignements</a
-          >
-        </li>
-        <li>
-          <a class="block px-5 py-4 lg:py-8" href="/agenda">Agenda</a>
-        </li>
-        <li>
-          <a class="block px-5 py-4 lg:py-8" href="/vmvhtgj92xtun6u">Contact</a>
-        </li>
-        <li>
-          <a
-            class="block px-5 py-4 lg:bg-black lg:px-8 lg:py-8 lg:text-white"
-            href="/owvjomdsz9hkg87">S'inscrire</a
-          >
-        </li>
+        {
+          navItems.map((item) => (
+            <li>
+              <a
+                class={`block px-5 py-4 lg:py-8 ${item.class || ""}`}
+                href={item.href || `/${slugById[item.id]}`}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
       </ul>
     </nav>
   </div>

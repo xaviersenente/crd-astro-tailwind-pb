@@ -1,0 +1,20 @@
+---
+const { page } = Astro.props;
+---
+
+{
+  page.lastPage > 1 && (
+    <nav
+      aria-label="Pagination"
+      class="my-8 flex items-center justify-center space-x-4 text-sm uppercase"
+    >
+      {page.url.prev && <a href={page.url.prev}>Précédent</a>}
+
+      <span>
+        Page {page.currentPage} / {page.lastPage}
+      </span>
+
+      {page.url.next && <a href={page.url.next}>Suivant</a>}
+    </nav>
+  )
+}

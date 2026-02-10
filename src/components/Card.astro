@@ -17,7 +17,7 @@ const event = Astro.props;
   <h3
     class="z-1 col-start-2 row-start-1 my-6 mr-4 self-end font-mono text-3xl text-white"
   >
-    <a href={`/agenda/event/${event.id}`}>{event.title}</a>
+    <a href={`/agenda/event/${event.slug}`}>{event.title}</a>
   </h3>
   <div
     class="z-2 col-span-1 col-start-2 row-span-2 row-start-2 space-y-4 bg-white p-6"
@@ -26,7 +26,7 @@ const event = Astro.props;
     <p>{event.excerpt}</p>
     <a
       class="inline-block border-b-2 border-black uppercase"
-      href={`/agenda/event/${event.id}`}>Plus d'info</a
+      href={`/agenda/event/${event.slug}`}>Plus d'info</a
     >
   </div>
 </article>

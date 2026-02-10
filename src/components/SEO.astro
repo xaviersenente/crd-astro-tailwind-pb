@@ -1,0 +1,42 @@
+---
+/**
+ * Composant SEO centralisé
+ * Génère les balises meta, Open Graph, Twitter Cards et canonical URL
+ */
+
+const { title, description, image, type = "website" } = Astro.props;
+
+const siteName = "Conservatoire Henri Dutilleux";
+
+// Titre affiché dans l'onglet du navigateur
+const titleHead =
+  Astro.url.pathname === "/" ? siteName : `${title} — ${siteName}`;
+
+// URL canonique absolue
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// Image OG : soit une image spécifique (événement), soit l'image par défaut
+const ogImage = image
+  ? new URL(image, Astro.site).href
+  : new URL("/og-default.jpg", Astro.site).href;
+---
+
+<!-- SEO de base -->
+<title>{titleHead}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Open Graph -->
+<meta property="og:title" content={titleHead} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:locale" content="fr_FR" />
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={titleHead} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />

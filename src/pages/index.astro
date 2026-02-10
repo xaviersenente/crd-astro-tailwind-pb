@@ -16,8 +16,9 @@ import points from "../assets/icones/points.svg";
 import imgCrdExt from "../assets/img/conservatoire-exterieur-03.jpg";
 
 import { getNextEvents } from "../js/backend.mjs";
+import { slugifyCollection } from "../js/helpers";
 
-const events = await getNextEvents();
+const events = slugifyCollection(await getNextEvents());
 
 const title = "Conservatoire Henri Dutilleux";
 const subTitle = "Conservatoire à Rayonnement Départemental du Grand Belfort";
