@@ -110,11 +110,11 @@ export async function getOneById(id, collection) {
 
 // Test de la fonction getOneById
 // Récupère un événement spécifique avec l'ID "4tvlzgedjmy6skf" depuis la collection "event"
-try {
-  const records = await getOneById("4tvlzgedjmy6skf", "event");
-  // Affiche les données récupérées dans la console
-  console.log(records);
-} catch (e) {
-  // En cas d'erreur, affiche l'erreur dans la console
-  console.error(e);
-}
+// try {
+//   const records = await getOneById("4tvlzgedjmy6skf", "event");
+//   // Affiche les données récupérées dans la console
+//   console.log(records);
+// } catch (e) {
+//   // En cas d'erreur, affiche l'erreur dans la console
+//   console.error(e);
+// }
