@@ -7,6 +7,8 @@ const POCKETBASE_URL =
   import.meta.env?.PUBLIC_POCKETBASE_URL ||
   "http://127.0.0.1:8090";
 
+console.log("PB URL used:", POCKETBASE_URL);
+
 // Création de l'instance PocketBase avec l'URL définie plus haut
 const pb = new PocketBase(POCKETBASE_URL);
 
