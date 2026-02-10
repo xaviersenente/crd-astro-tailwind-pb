@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://conservatoire-belfort.fr/sitemap-index.xml

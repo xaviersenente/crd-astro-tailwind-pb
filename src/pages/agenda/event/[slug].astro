@@ -2,15 +2,16 @@
 import ImagePB from "../../../components/ImagePB.astro";
 import Layout from "../../../layouts/Layout.astro";
 import Patterns from "../../../components/AnimatedPatterns.astro";
-import { formatDate } from "../../../js/helpers";
+import { formatDate, slugifyCollection } from "../../../js/helpers";
 
 import { getCollection } from "../../../js/backend.mjs";
 
 export async function getStaticPaths() {
   const events = await getCollection("event");
+  const eventsWithSlug = slugifyCollection(events);
 
-  return events.map((event) => ({
-    params: { slug: event.id },
+  return eventsWithSlug.map((event) => ({
+    params: { slug: event.slug },
     props: { event },
   }));
 }

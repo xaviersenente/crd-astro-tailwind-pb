@@ -4,12 +4,14 @@ import Hero from "../components/Hero.astro";
 import ImagePB from "../components/ImagePB.astro";
 
 import { getCollection } from "../js/backend.mjs";
+import { slugifyCollection } from "../js/helpers";
 
 export async function getStaticPaths() {
   const pages = await getCollection("page");
+  const pagesWithSlug = slugifyCollection(pages);
 
-  return pages.map((page) => ({
-    params: { page: page.id },
+  return pagesWithSlug.map((page) => ({
+    params: { page: page.slug },
     props: { page },
   }));
 }

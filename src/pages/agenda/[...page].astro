@@ -9,10 +9,12 @@ import Pagination from "../../components/Pagination.astro";
 import imgHero from "../../assets/img/musique-02.jpg";
 
 import { getUpcomingEvents } from "../../js/backend.mjs";
+import { slugifyCollection } from "../../js/helpers";
 
 export async function getStaticPaths({ paginate }) {
   const events = await getUpcomingEvents("event");
-  return paginate(events, { pageSize: 3 });
+  const eventsWithSlug = slugifyCollection(events);
+  return paginate(eventsWithSlug, { pageSize: 3 });
 }
 
 const { page } = Astro.props;
