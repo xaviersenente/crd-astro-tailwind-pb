@@ -4,12 +4,18 @@ import { Picture } from "astro:assets";
 import Layout from "../../layouts/Layout.astro";
 import Hero from "../../components/Hero.astro";
 import Card from "../../components/Card.astro";
+import Pagination from "../../components/Pagination.astro";
 
 import imgHero from "../../assets/img/musique-02.jpg";
 
 import { getUpcomingEvents } from "../../js/backend.mjs";
 
-const events = await getUpcomingEvents("event");
+export async function getStaticPaths({ paginate }) {
+  const events = await getUpcomingEvents("event");
+  return paginate(events, { pageSize: 3 });
+}
+
+const { page } = Astro.props;
 
 const title = "Agenda";
 const description =
@@ -32,11 +38,12 @@ const description =
   </Hero>
   <div class="grille my-24">
     {
-      events.length > 0 ? (
-        events.map((event) => <Card {...event} />)
+      page.data.length > 0 ? (
+        page.data.map((event) => <Card {...event} />)
       ) : (
         <p class="col-span-4">Aucun événement à afficher.</p>
       )
     }
   </div>
+  <Pagination page={page} />
 </Layout>
