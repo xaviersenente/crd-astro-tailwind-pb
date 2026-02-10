@@ -5,12 +5,9 @@ import "@fontsource-variable/mulish";
 
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import SEO from "../components/SEO.astro";
 
-const { title, description } = Astro.props;
-const siteName = "Conservatoire Henri Dutilleux";
-const titleHead =
-  Astro.url.pathname === "/" ? siteName : `${title} — ${siteName}`;
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const { title, description, image, type } = Astro.props;
 ---
 
 <!doctype html>
@@ -18,14 +15,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="canonical" href={canonicalURL} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="generator" content={Astro.generator} />
-    <title>{titleHead}</title>
-    <meta name="description" content={description} />
+    <SEO title={title} description={description} image={image} type={type} />
   </head>
   <body>
     <Header />
