@@ -7,7 +7,7 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://conservatoire-belfort.fr",
+  site: "https://conservatoirecrd.netlify.app",
 
   vite: {
     plugins: [tailwindcss()],
