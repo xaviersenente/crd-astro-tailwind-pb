@@ -3,16 +3,14 @@ import { Picture } from "astro:assets";
 import { pb } from "../js/backend.mjs";
 const {
   record,
-  field = "imgFile",
+  field,
   alt,
   classPicture,
   classImg,
   thumb = "1024x1024",
 } = Astro.props;
 
-const imageUrl = record?.[field]
-  ? pb.files.getURL(record, record[field], { thumb })
-  : null;
+const imageUrl = field ? pb.files.getURL(record, field, { thumb }) : null;
 ---
 
 {
