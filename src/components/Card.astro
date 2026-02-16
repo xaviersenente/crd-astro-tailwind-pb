@@ -9,7 +9,7 @@ const event = Astro.props;
 >
   <ImagePB
     record={event}
-    field="imgFile"
+    field={event.imgFile}
     alt={event.imgAlt}
     classPicture="duotone col-start-1 row-start-1 col-span-2 row-span-2 group-hover:before:bg-black"
     classImg="group-hover:grayscale-0 group-hover:mix-blend-normal"
