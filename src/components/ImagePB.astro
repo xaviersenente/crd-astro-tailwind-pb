@@ -1,16 +1,17 @@
 ---
 import { Picture } from "astro:assets";
-import { pb } from "../js/backend.mjs";
-const {
-  record,
-  field,
-  alt,
-  classPicture,
-  classImg,
-  thumb = "1024x1024",
-} = Astro.props;
+import { getFileURL } from "../js/backend.mjs";
 
-const imageUrl = field ? pb.files.getURL(record, field, { thumb }) : null;
+const { record, field, alt, classPicture, classImg, thumb, layout } =
+  Astro.props;
+
+// Layouts disponibles pour les images responsives Astro
+// @see https://docs.astro.build/fr/reference/modules/astro-assets/#layout
+const VALID_LAYOUTS = ["constrained", "full-width", "fixed", "none"];
+// Vérifie que le layout est valide, sinon utilise "constrained" par défaut
+const resolvedLayout = VALID_LAYOUTS.includes(layout) ? layout : "constrained";
+
+const imageUrl = record && field ? getFileURL(record, field, thumb) : null;
 ---
 
 {
@@ -19,10 +20,10 @@ const imageUrl = field ? pb.files.getURL(record, field, { thumb }) : null;
       pictureAttributes={{ class: classPicture }}
       class={classImg}
       inferSize={true}
-      layout="full-width"
+      layout={resolvedLayout}
       formats={["avif", "webp"]}
       src={imageUrl}
-      alt={alt || "Image"}
+      alt={alt || ""}
     />
   )
 }
