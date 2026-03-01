@@ -1,16 +1,25 @@
 ---
 import { Picture } from "astro:assets";
-import { pb } from "../js/backend.mjs";
+import { getFileURL } from "../js/backend.mjs";
+
+// Layouts disponibles pour les images responsives Astro
+// @see https://docs.astro.build/fr/reference/modules/astro-assets/#layout
+const VALID_LAYOUTS = ["responsive", "fixed", "full-width", "none"];
+
 const {
   record,
   field,
   alt,
   classPicture,
   classImg,
-  thumb = "1024x1024",
+  thumb,
+  layout = "full-width",
 } = Astro.props;
 
-const imageUrl = field ? pb.files.getURL(record, field, { thumb }) : null;
+// Vérifie que le layout est valide, sinon utilise "full-width" par défaut
+const resolvedLayout = VALID_LAYOUTS.includes(layout) ? layout : "full-width";
+
+const imageUrl = record && field ? getFileURL(record, field, thumb) : null;
 ---
 
 {
@@ -19,10 +28,10 @@ const imageUrl = field ? pb.files.getURL(record, field, { thumb }) : null;
       pictureAttributes={{ class: classPicture }}
       class={classImg}
       inferSize={true}
-      layout="full-width"
+      layout={resolvedLayout}
       formats={["avif", "webp"]}
       src={imageUrl}
-      alt={alt || "Image"}
+      alt={alt || ""}
     />
   )
 }
